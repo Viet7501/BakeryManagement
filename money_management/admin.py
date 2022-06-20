@@ -8,18 +8,20 @@ from money_management.models import Category, Transaction
 class TransactionAdmin(admin.ModelAdmin):
     fieldsets = [
         ('Information', {
+            'classes': ('grp-collapse grp-open',),
             'fields': ['category', 'name', 'amount', 'note']
         }),
     ]
 
-    list_display = ['category', 'name', 'amount', 'note']
-    list_display_links = ['name']
+    list_display = ['id', 'category', 'name', 'amount', 'note']
+    list_display_links = ['id', 'name']
 
 
 class TransactionInline(admin.TabularInline):
     model = Transaction
     extra = 0
-    fields = ['name', 'amount', 'note']
+    readonly_fields = ['created_at']
+    fields = ['name', 'amount', 'note', 'created_at']
 
 
 class CategoryAdmin(admin.ModelAdmin):
