@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'product_management.apps.ManagementConfig',
     'money_management.apps.MoneyManagementConfig',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [

@@ -37,10 +37,10 @@ class History(TrackingAbstractModel):
             )
         self.price = self.product.price
         super(History, self).save(force_insert, force_update, using, update_fields)
-        if self.action == 0:
+        if self.action == QuantityType.ADD:
             self.product.quantity += self.quantity
             self.product.save()
-        elif self.action == 1:
+        elif self.action == QuantityType.EXPIRED:
             if self.product.quantity < self.quantity:
                 raise ValueError(
                     "Cannot update history because current_quantity < expired_quantity."
@@ -49,7 +49,15 @@ class History(TrackingAbstractModel):
                 self.product.quantity -= self.quantity
                 self.product.save()
         else:
-            self.product.quantity = self.quantity
-            self.product.save()
+            if self.quantity > self.product.quantity:
+                raise ValueError(
+                    "Cannot update history because current_quantity < inventory_quantity."
+                )
+            else:
+                self.product.quantity = self.quantity
+                self.product.save()
+
+        # def subtotal():
+
 
 
