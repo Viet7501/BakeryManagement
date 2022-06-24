@@ -39,7 +39,6 @@ class History(TrackingAbstractModel):
         super(History, self).save(force_insert, force_update, using, update_fields)
         if self.action == QuantityType.ADD:
             self.product.quantity += self.quantity
-            self.product.save()
         elif self.action == QuantityType.EXPIRED:
             if self.product.quantity < self.quantity:
                 raise ValueError(
@@ -47,7 +46,6 @@ class History(TrackingAbstractModel):
                 )
             else:
                 self.product.quantity -= self.quantity
-                self.product.save()
         else:
             if self.quantity > self.product.quantity:
                 raise ValueError(
@@ -55,8 +53,7 @@ class History(TrackingAbstractModel):
                 )
             else:
                 self.product.quantity = self.quantity
-                self.product.save()
-
+        self.product.save()
         # def subtotal():
 
 
