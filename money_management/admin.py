@@ -25,6 +25,7 @@ class TransactionInline(admin.TabularInline):
 
 
 class CategoryAdmin(admin.ModelAdmin):
+    list_filter = ['name']
     fieldsets = [
         ('Information', {
             'fields': ['name']

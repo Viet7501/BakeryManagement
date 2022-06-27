@@ -21,7 +21,7 @@ class ModifiedAbstractModel(models.Model):
     modified_by = models.ForeignKey(
         User,
         blank=True, null=True, on_delete=models.SET_NULL,
-        related_name='%(app_label)s_%(class)s_modified_by'
+        related_name='%(app_label)s_%(class)s_modified_by',
     )
     modified_at = models.DateTimeField(
         blank=True, null=True, auto_now=True,

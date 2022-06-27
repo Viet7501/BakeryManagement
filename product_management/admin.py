@@ -1,6 +1,5 @@
 from django.contrib import admin
 from product_management.models import Product, History
-
 # Register your models here.
 
 
@@ -14,6 +13,8 @@ class HistoryInline(admin.TabularInline):
 
 class ProductAdmin(admin.ModelAdmin):
     readonly_fields = ['quantity']
+    search_fields = ['name']
+    list_filter = ['price']
     fieldsets = [
         ('Information', {
             'fields': ['name', 'price', 'quantity']

@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from BakeryManagement.models import TrackingAbstractModel, NameAbstractModel
 from product_management.constants import QuantityType
+from django.core.exceptions import ValidationError
 
 
 # Create your models here.
@@ -31,30 +32,23 @@ class History(TrackingAbstractModel):
         return QuantityType.ACTION_CHOICES.get(self.action)
 
     def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
-        if self.action == 1 and self.product.quantity < self.quantity:
-            raise ValueError(
-                "Cannot update history because current_quantity < expired_quantity."
-            )
         self.price = self.product.price
         super(History, self).save(force_insert, force_update, using, update_fields)
         if self.action == QuantityType.ADD:
             self.product.quantity += self.quantity
         elif self.action == QuantityType.EXPIRED:
             if self.product.quantity < self.quantity:
-                raise ValueError(
+                raise ValidationError(
                     "Cannot update history because current_quantity < expired_quantity."
                 )
             else:
                 self.product.quantity -= self.quantity
         else:
-            if self.quantity > self.product.quantity:
-                raise ValueError(
+            if self.product.quantity < self.quantity:
+                raise ValidationError(
                     "Cannot update history because current_quantity < inventory_quantity."
                 )
             else:
                 self.product.quantity = self.quantity
         self.product.save()
         # def subtotal():
-
-
-
