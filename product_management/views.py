@@ -1,19 +1,11 @@
-from django.shortcuts import render
-from django.contrib.auth.models import User
-from product_management.models import Product
+from product_management.models import Product, History
 from rest_framework import viewsets
 from rest_framework import permissions
-from product_management.serializers import UserSerializer, ProductSerializer
+from product_management.serializers import ProductSerializer, HistorySerializer
+
+
 # Create your views here.
-
-
-class UserViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows users to be viewed or edited.
-    """
-    queryset = User.objects.all().order_by('-date_joined')
-    serializer_class = UserSerializer
-    permission_classes = [permissions.IsAuthenticated]
+# ViewSets define the view behavior.
 
 
 class ProductViewSet(viewsets.ModelViewSet):
@@ -22,4 +14,13 @@ class ProductViewSet(viewsets.ModelViewSet):
     """
     queryset = Product.objects.all().order_by('-id')
     serializer_class = ProductSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.BasePermission]
+
+
+class HistoryViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows users to be viewed or edited.
+    """
+    queryset = History.objects.all().order_by('-id')
+    serializer_class = HistorySerializer
+    permission_classes = [permissions.BasePermission]

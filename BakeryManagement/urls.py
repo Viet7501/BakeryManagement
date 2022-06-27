@@ -15,17 +15,19 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from rest_framework import routers, viewsets
-from product_management.views import UserViewSet, ProductViewSet
-# Serializers define the API representation.
-
-
-# ViewSets define the view behavior.
+from rest_framework import routers
+from product_management.views import ProductViewSet, HistoryViewSet
+from money_management.views import CategoryViewSet, TransactionViewSet
+from BakeryManagement.views import UserViewSet
 
 # Routers provide an easy way of automatically determining the URL conf.
 router = routers.DefaultRouter()
 router.register(r'users', UserViewSet)
 router.register(r'Product', ProductViewSet)
+router.register(r'History', HistoryViewSet)
+router.register(r'Category', CategoryViewSet)
+router.register(r'Transaction', TransactionViewSet)
+
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
