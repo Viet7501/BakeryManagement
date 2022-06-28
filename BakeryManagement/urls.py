@@ -16,17 +16,15 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
-from product_management.views import ProductViewSet, HistoryViewSet
-from money_management.views import CategoryViewSet, TransactionViewSet
 from BakeryManagement.views import UserViewSet
+from money_management.urls import router as money_management_router
+from product_management.urls import router as product_management_router
 
 # Routers provide an easy way of automatically determining the URL conf.
 router = routers.DefaultRouter()
 router.register(r'users', UserViewSet)
-router.register(r'Product', ProductViewSet)
-router.register(r'History', HistoryViewSet)
-router.register(r'Category', CategoryViewSet)
-router.register(r'Transaction', TransactionViewSet)
+router.registry.extend(money_management_router.registry)
+router.registry.extend(product_management_router.registry)
 
 
 # Wire up our API using automatic URL routing.
