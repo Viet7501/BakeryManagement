@@ -2,11 +2,8 @@ from django.db import models
 from django.contrib.auth.models import User
 from BakeryManagement.models import TrackingAbstractModel, NameAbstractModel
 
-# Create your models here.
-
 
 class Category(TrackingAbstractModel, NameAbstractModel):
-
     class Meta:
         verbose_name_plural = "Categories"
 

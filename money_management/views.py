@@ -14,7 +14,7 @@ class CategoryViewSet(viewsets.ModelViewSet):
     """
     queryset = Category.objects.all().order_by('-id')
     serializer_class = CategorySerializer
-    permission_classes = [permissions.BasePermission]
+    permission_classes = [permissions.IsAuthenticated]
 
 
 class TransactionViewSet(viewsets.ModelViewSet):
@@ -23,4 +23,4 @@ class TransactionViewSet(viewsets.ModelViewSet):
     """
     queryset = Transaction.objects.all().order_by('-id')
     serializer_class = TransactionSerializer
-    permission_classes = [permissions.BasePermission]
+    permission_classes = [permissions.IsAuthenticated]

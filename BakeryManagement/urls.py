@@ -19,6 +19,7 @@ from rest_framework import routers
 from BakeryManagement.views import UserViewSet
 from money_management.urls import router as money_management_router
 from product_management.urls import router as product_management_router
+from rest_framework.authtoken import views
 
 # Routers provide an easy way of automatically determining the URL conf.
 router = routers.DefaultRouter()
@@ -34,4 +35,5 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('grappelli/', include('grappelli.urls')),  # grappelli URLS
     path('admin/', admin.site.urls),
+    path('api-token-auth/', views.obtain_auth_token),
 ]

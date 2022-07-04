@@ -14,7 +14,7 @@ class ProductViewSet(viewsets.ModelViewSet):
     """
     queryset = Product.objects.all().order_by('-id')
     serializer_class = ProductSerializer
-    permission_classes = [permissions.BasePermission]
+    permission_classes = [permissions.IsAuthenticated]
 
 
 class HistoryViewSet(viewsets.ModelViewSet):
@@ -23,4 +23,4 @@ class HistoryViewSet(viewsets.ModelViewSet):
     """
     queryset = History.objects.all().order_by('-id')
     serializer_class = HistorySerializer
-    permission_classes = [permissions.BasePermission]
+    permission_classes = [permissions.IsAuthenticated]

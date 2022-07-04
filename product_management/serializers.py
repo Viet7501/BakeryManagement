@@ -14,4 +14,4 @@ class HistorySerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = History
-        fields = ['product_name', 'quantity', 'price', 'action']
+        fields = ['id', 'product_name', 'quantity', 'price', 'action']
