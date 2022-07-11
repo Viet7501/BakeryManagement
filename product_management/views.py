@@ -17,7 +17,7 @@ class ProductViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
 
 
-class HistoryViewSet(viewsets.ModelViewSet):
+class HistoryViewSet(viewsets.ReadOnlyModelViewSet):
     """
     API endpoint that allows users to be viewed or edited.
     """

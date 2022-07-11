@@ -61,3 +61,4 @@ class NameAbstractModel(models.Model):
     def autocomplete_search_fields():
         return "id__iexact", "name__icontains",
 
+

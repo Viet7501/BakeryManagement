@@ -6,7 +6,7 @@ from money_management.models import Category, Transaction
 class CategorySerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Category
-        fields = ['name']
+        fields = ['id', 'name']
 
 
 class TransactionSerializer(serializers.HyperlinkedModelSerializer):

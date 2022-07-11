@@ -15,25 +15,19 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from rest_framework import routers
-from BakeryManagement.views import UserViewSet
-from money_management.urls import router as money_management_router
-from product_management.urls import router as product_management_router
-from rest_framework.authtoken import views
+from BakeryManagement.views import CustomAuthToken
+
 
 # Routers provide an easy way of automatically determining the URL conf.
-router = routers.DefaultRouter()
-router.register(r'users', UserViewSet)
-router.registry.extend(money_management_router.registry)
-router.registry.extend(product_management_router.registry)
-
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
 urlpatterns = [
-    path('', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('grappelli/', include('grappelli.urls')),  # grappelli URLS
     path('admin/', admin.site.urls),
-    path('api-token-auth/', views.obtain_auth_token),
+    path('api-token-auth/', CustomAuthToken.as_view()),
+    path('money_management/api/v1/', include('money_management.urls')),
+    path('product_management/api/v1/', include('product_management.urls')),
+
 ]

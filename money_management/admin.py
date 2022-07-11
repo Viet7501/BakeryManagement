@@ -12,7 +12,6 @@ class TransactionAdmin(admin.ModelAdmin):
             'fields': ['category', 'name', 'amount', 'note']
         }),
     ]
-
     list_display = ['id', 'category', 'name', 'amount', 'note']
     list_display_links = ['id', 'name']
 

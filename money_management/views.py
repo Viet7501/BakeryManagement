@@ -1,26 +1,24 @@
 from money_management.models import Category, Transaction
-from rest_framework import viewsets
-from rest_framework import permissions
+from rest_framework import viewsets, permissions
 from money_management.serializers import CategorySerializer, TransactionSerializer
-
-
+from rest_framework.generics import RetrieveAPIView, ListAPIView
 # Create your views here.
 # ViewSets define the view behavior.
 
 
-class CategoryViewSet(viewsets.ModelViewSet):
+class CategoryView(ListAPIView, RetrieveAPIView, viewsets.GenericViewSet):
     """
     API endpoint that allows users to be viewed or edited.
     """
-    queryset = Category.objects.all().order_by('-id')
+    permission_classes = [permissions.IsAuthenticated]
+    queryset = Category.objects.all()
     serializer_class = CategorySerializer
-    permission_classes = [permissions.IsAuthenticated]
 
 
-class TransactionViewSet(viewsets.ModelViewSet):
+class TransactionViewSet(viewsets.ReadOnlyModelViewSet):
     """
     API endpoint that allows users to be viewed or edited.
     """
-    queryset = Transaction.objects.all().order_by('-id')
-    serializer_class = TransactionSerializer
     permission_classes = [permissions.IsAuthenticated]
+    queryset = Transaction.objects.all()
+    serializer_class = TransactionSerializer
