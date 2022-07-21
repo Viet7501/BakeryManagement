@@ -10,3 +10,12 @@ class QuantityType:
     )
 
     QuantityType = dict(ACTION_CHOICES)
+
+
+# class ProductChoice:
+#
+#     PRODUCT_CHOICE = (
+#
+#     )
+#
+#     PRODUCT_CHOICE_DICT = dict(PRODUCT_CHOICE)

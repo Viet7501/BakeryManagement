@@ -2,6 +2,7 @@ from product_management.models import Product, History
 from rest_framework import viewsets
 from rest_framework import permissions
 from product_management.serializers import ProductSerializer, HistorySerializer
+from rest_framework.generics import RetrieveAPIView, ListAPIView, CreateAPIView
 
 
 # Create your views here.
@@ -17,7 +18,7 @@ class ProductViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
 
 
-class HistoryViewSet(viewsets.ReadOnlyModelViewSet):
+class HistoryViewSet(ListAPIView, RetrieveAPIView, CreateAPIView, viewsets.GenericViewSet):
     """
     API endpoint that allows users to be viewed or edited.
     """

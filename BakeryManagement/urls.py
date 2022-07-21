@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from BakeryManagement.views import CustomAuthToken
+from money_management.views import TransactionReportAPIView
 
 
 # Routers provide an easy way of automatically determining the URL conf.
@@ -29,5 +30,5 @@ urlpatterns = [
     path('api-token-auth/', CustomAuthToken.as_view()),
     path('money_management/api/v1/', include('money_management.urls')),
     path('product_management/api/v1/', include('product_management.urls')),
-
+    path("report/", TransactionReportAPIView.as_view(), name="report"),
 ]

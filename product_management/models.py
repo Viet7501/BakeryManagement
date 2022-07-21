@@ -31,6 +31,9 @@ class History(TrackingAbstractModel):
     def status_str(self):
         return QuantityType.ACTION_CHOICES.get(self.action)
 
+    # def subtotal(self):
+    #     return self.quantity * self.product.price
+
     def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
         self.price = self.product.price
         super(History, self).save(force_insert, force_update, using, update_fields)
@@ -51,4 +54,3 @@ class History(TrackingAbstractModel):
             else:
                 self.product.quantity = self.quantity
         self.product.save()
-        # def subtotal():

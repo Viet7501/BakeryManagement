@@ -4,7 +4,7 @@ from money_management.views import CategoryView, TransactionViewSet
 
 
 router = routers.DefaultRouter()
-router.register(prefix='transaction', viewset= TransactionViewSet, basename='transaction')
+router.register(prefix='transaction', viewset=TransactionViewSet, basename='transaction')
 router.register(prefix=r'category', viewset=CategoryView, basename='category')
 
 urlpatterns = [
